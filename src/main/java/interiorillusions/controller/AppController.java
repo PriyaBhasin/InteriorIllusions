@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,7 +54,12 @@ public class AppController {
 		return "allproducts"; 
 	}
 	@RequestMapping("/addnewproduct")
-	public String addProduct(@ModelAttribute("product")Product p){
+	public String addProduct(@Valid @ModelAttribute("product")Product p,BindingResult result){
+		if(result.hasErrors()){
+			System.out.println("adding a blog has errors");
+			return "addproduct";
+		}
+		else{
 		//add a product by calling product service
 		pservice.addProduct(p);
 		//-----------------multipart---------------------------
@@ -78,29 +86,43 @@ public class AppController {
 			
 		
 		return "index";
-		
+		}
 	}
 	@RequestMapping("/updateproduct")
+	
 	public ModelAndView showupdateproduct(@RequestParam("id")String id) {
 		Product p=pservice.getProduct(Integer.parseInt(id));
 		//pservice.updateProduct(p);
 		
 		return new ModelAndView("updateproduct","product",p);
-	}
+	} 
+		
+	
 	@RequestMapping("/updateaproduct")
-	public String updateproduct(@ModelAttribute("product")Product p) {
+	public String updateproduct(@Valid @ModelAttribute("product")Product p,BindingResult result){
+		if(result.hasErrors()){
+			System.out.println("adding a blog has errors");
+			return "updateproduct";
+		}
+		else{
+			
 
 		pservice.updateProduct(p);
 		System.out.println("product is updated");
 		return "allproducts";
 	}
+		}
+
+	
 	@RequestMapping("/deleteproduct")
 	public ModelAndView showdeleteproduct(@RequestParam("id")String id) {
 		Product p=pservice.getProduct(Integer.parseInt(id));
 		pservice.deleteProduct(p);
 		
 		return new ModelAndView("allproduct","product",p);}
-}
+                }
+	
+	
 
 
 	

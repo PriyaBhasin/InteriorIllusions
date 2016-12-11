@@ -13,14 +13,17 @@
     <tr>
         <td><form:label path="name">Name</form:label></td>
         <td><form:input path="name" /></td>
+        <td><form:errors path="name" cssClass="error"/></td>
     </tr>
     <tr>
         <td><form:label path="price">Price</form:label></td>
         <td><form:input path="price" /></td>
+         <td><form:errors path="price" cssClass="error"/></td>
     </tr>
     <tr>
         <td><form:label path="description">description</form:label></td>
         <td><form:input path="description" /></td>
+         <td><form:errors path="description" cssClass="error"/></td>
     </tr>
     <tr>
         <td><form:label path="category">category</form:label></td>
