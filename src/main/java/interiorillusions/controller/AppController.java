@@ -15,10 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import interiorillusions.model.Product;
+import interiorillusions.model.Role;
+import interiorillusions.model.User;
 import interiorillusions.service.ProductService;
+import interiorillusions.service.RoleService;
+import interiorillusions.service.UserService;
 
 @Controller
 public class AppController {	
+	@Autowired
+	UserService uservice;
+	@Autowired
+	RoleService rservice;
 	@Autowired
 	ProductService pservice;	
 	@Autowired
@@ -29,12 +37,34 @@ public class AppController {
 	}	
 	@RequestMapping("/login")
 	public String showLogin() {
-		return "login";
+		return "loginPage";
 	}
 	@RequestMapping("/signup")
-	public String showSignup() {
-		return "signup";
+	public ModelAndView showSignup() {
+		return new ModelAndView("signup","user",new User());	
 	}
+	@RequestMapping("/register")
+	public String Register(@Valid @ModelAttribute("user")User u,BindingResult result){
+		if(result.hasErrors()){
+			System.out.println("adding user has errors");
+			return "signup";
+		}
+		else{
+         uservice.addUser(u);
+       System.out.println("Data Inserted"+ u.getEmail());
+       u.setEnabled(true);
+         
+         Role r=new Role();
+         String us;
+         us=u.getUsername();
+         r.setUsername(us);
+         r.setRolename("USER");
+         rservice.addRole(r);
+		}
+		return  "index";
+	
+	}
+	
 	@RequestMapping("/aboutus")
 	public String showAboutus() {
 		return "aboutus";

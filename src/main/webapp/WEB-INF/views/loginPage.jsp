@@ -1,4 +1,3 @@
-
 <html>
 <style>
 body 
@@ -17,7 +16,8 @@ img.avatar {
 	<%@include file="header.jsp"%>
 	<div class="container">
 		<div class="jumbotron">
-			<form>
+		<form name="login" action="perform_login" method="post" >
+			
 				<div class="form-group">
 					<div id="legend">
 						<legend class="">Login</legend>
@@ -25,12 +25,12 @@ img.avatar {
 					<div class="imgcontainer">
 						<img src="resources/images/login.png" alt="Avatar" class="avatar">
 					</div>
-					<label for="email">Email:</label> <input type="email"
-						class="form-control" id="email" placeholder="Enter email">
+					<label for="username">User Name</label> <input type="text"
+						class="form-control" name="username" placeholder="Enter User Name">
 				</div>
 				<div class="form-group">
 					<label for="pwd">Password:</label> <input type="password"
-						class="form-control" id="pwd" placeholder="Enter password">
+						class="form-control" name="password" placeholder="Enter password">
 				</div>
 				<div class="checkbox">
 					<label><input type="checkbox"> Remember me</label>
@@ -41,7 +41,7 @@ img.avatar {
 		</div>
 	</div>
 
-	<%@include file="footer.jsp"%>
+<%@include file="footer.jsp"%>
 </body>
 </html>
 
