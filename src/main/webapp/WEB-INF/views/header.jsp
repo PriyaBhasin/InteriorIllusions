@@ -12,9 +12,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script language="javascrpit" type="text/javascript">
+<script language="javascript" type="text/javascript">
 	function formSubmit() {
-		document.getElementById("logout").sumbit();
+		document.getElementById("logout").submit();
 	}
 </script>
 </head>
@@ -34,19 +34,28 @@
 				<li><a href="aboutus">About Us</a></li>
 
 				<li><a href="contactus">Contact Us</a></li>
-				<li><a href="allproducts">All Products</a></li>
-				<li><a href="addproduct">Add a Product</a></li>
+				
+											
+								<c:if test="${pageContext.request.userPrincipal.name=='admin'}">
+										<li><a href="allproducts">All Products</a></li>
+										<li><a href="addproduct">Add a Product</a></li>				
+								</c:if>				
+						
+						
+				
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
-					<li>Welcome ${pageContext.request.userPrincipal.name}</li>
-					<li> <a href="javascript:formSubmit()">Logout</a></li>
-					<security:authentication var="user" property="principal.authorities" />
-
+					<font color="white"><li>Welcome ${pageContext.request.userPrincipal.name}</li></font>
+					<li><a href="javascript:formSubmit()">Logout</a></li>
+					<security:authentication var="user"
+						property="principal.authorities" />
 					<security:authorize var="loggedIn" access="isAuthenticated()">
-						<security:authorize access="hasRole('USER')">
+						<security:authorize access="hasRole('ADMIN')">
+									
 						</security:authorize>
 					</security:authorize>
+					
 				</c:if>
 				<li><a href="signup"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li>

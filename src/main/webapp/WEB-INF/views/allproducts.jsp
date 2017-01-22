@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="java.util.ArrayList"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,14 +48,14 @@ body {
 										<div class="col-sm-4">${p.id}.${p.name}</div>
 										<div class="col-sm-3"></div>
 										<div class="col-sm-2">
-											<a href="updateproduct?id=${p.id}" data-toggle="tooltip"
+											<a href="admin/updateproduct?id=${p.id}" data-toggle="tooltip"
 												title="Update"><button class="btn btn-default"
 													type="submit" data-toggle="modal">
 													<span class="glyphicon glyphicon-pencil"></span>
 												</button></a>
 										</div>
 										<div class="col-sm-3">
-											<a href="deleteproduct?id=${p.id}" data-toggle="tooltip"
+											<a href="admin/deleteproduct?id=${p.id}" data-toggle="tooltip"
 												title="Delete"><button class="btn btn-default"
 													type="submit" data-toggle="modal">
 													<span class="glyphicon glyphicon-trash"></span>
